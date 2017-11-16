@@ -11,6 +11,7 @@ import Photos
 
 class ViewController: UIViewController {
     
+    @IBOutlet weak var imageview: UIImageView!
     func simpleQueues() {
 
         let queue = DispatchQueue(label: "com.niko.myqueue")
@@ -41,32 +42,114 @@ class ViewController: UIViewController {
             }
         }
     }
+    var inactiveQueue: DispatchQueue!
+    func concurrentQueues() {
+//        let anotherQueue = DispatchQueue(label: "com.niko.anotherQueue", qos: .utility, attributes: .concurrent)
+        let anotherQueue = DispatchQueue(label: "com.niko.anotherQueue", qos: .utility, attributes: [.initiallyInactive, .concurrent])
+        
+        inactiveQueue = anotherQueue
+        
+        anotherQueue.async {
+            for i in 0..<10 {
+                print("🌞", i)
+            }
+        }
+        
+        anotherQueue.async {
+            for i in 100..<110 {
+                print("🌛", i)
+            }
+        }
+        
+        anotherQueue.async {
+            for i in 1000..<1010 {
+                print("🌍", i)
+            }
+        }
+    }
+    
+    func queueWithDelay(){
+        let delayQueue = DispatchQueue(label: "com.niko.delayqueue", qos: .userInitiated)
+        print(Date())
+        let additionalTime: DispatchTimeInterval = .seconds(2)
+        
+        delayQueue.asyncAfter(deadline: .now() + additionalTime) {
+            print(Date())
+        }
+    }
+    
+    func fetchImage() {
+        let imageURL: URL = URL(string: "https://www.appcoda.com/wp-content/uploads/2015/12/blog-logo-dark-400.png")!
+        
+        (URLSession(configuration: URLSessionConfiguration.default)).dataTask(with: imageURL, completionHandler:{ (imageData, response, error) in
+            if let data = imageData {
+                print("did download image data")
+                DispatchQueue.main.async {
+                    self.imageview.image = UIImage(data: data)
+                }
+            }
+        }).resume()
+    }
+    
+    func useWorkItem() {
+        var value = 10
+        
+        let workItem = DispatchWorkItem {
+            value += 5
+        }
+        
+        workItem.perform()
+        
+        let queue = DispatchQueue.global(qos: .utility)
+        
+        queue.async(execute: workItem)
+        
+        workItem.notify(queue: DispatchQueue.main) {
+            print("value = ", value)
+        }
+    }
+    
     
     override func viewDidAppear(_ animated: Bool) {
 //        simpleQueues()
-        queuesWithQoS()
+//        queuesWithQoS()
+        concurrentQueues()
+        if let queue = inactiveQueue {
+            queue.activate()
+        }
+//        queueWithDelay()
+//        fetchImage()
+//        useWorkItem()
     }
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
         let authorizationStatus = PHPhotoLibrary.authorizationStatus()
-        switch authorizationStatus {
-        case PHAuthorizationStatus.notDetermined:
-            print("notDetermined")
-        case PHAuthorizationStatus.denied:
-            print("denied")
-        case PHAuthorizationStatus.authorized:
-            print("authorized")
-        case PHAuthorizationStatus.restricted:
-            print("restricted")
-        default:
-            print("default")
-        }
             
-        let allPhotosOptions = PHFetchOptions()
-        allPhotosOptions.predicate = NSPredicate(format: "mediaType = %d", PHAssetMediaType.image.rawValue)
-        let result = PHAsset.fetchAssets(with: PHAssetMediaType.image, options: allPhotosOptions)
-        print(result.count)
+        
+        PHPhotoLibrary.requestAuthorization({
+            (status: PHAuthorizationStatus) in
+            switch status {
+            case PHAuthorizationStatus.notDetermined:
+                print("notDetermined")
+            case PHAuthorizationStatus.denied:
+                print("denied")
+            case PHAuthorizationStatus.authorized:
+                print("authorized")
+                let allPhotosOptions = PHFetchOptions()
+                allPhotosOptions.predicate = NSPredicate(format: "mediaType = %d", PHAssetMediaType.image.rawValue)
+                let result = PHAsset.fetchAssets(with: PHAssetMediaType.image, options: allPhotosOptions)
+                print(result.count)
+                let asset = result[0]
+//                asset.
+            case PHAuthorizationStatus.restricted:
+                print("restricted")
+            default:
+                print("default")
+            }
+        })
+        
         
         // Do any additional setup after loading the view, typically from a nib.
     }
