@@ -14,6 +14,7 @@
 		23A436BD1FB4478300CE7FC4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 23A436BB1FB4478300CE7FC4 /* LaunchScreen.storyboard */; };
 		23A436C81FB4478300CE7FC4 /* pracTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23A436C71FB4478300CE7FC4 /* pracTests.swift */; };
 		23A436D31FB4478300CE7FC4 /* pracUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23A436D21FB4478300CE7FC4 /* pracUITests.swift */; };
+		23C84D0E1FBE830F006F28F5 /* ImagePicker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23C84D0D1FBE830F006F28F5 /* ImagePicker.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		23A436CE1FB4478300CE7FC4 /* pracUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = pracUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		23A436D21FB4478300CE7FC4 /* pracUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pracUITests.swift; sourceTree = "<group>"; };
 		23A436D41FB4478300CE7FC4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		23C84D0D1FBE830F006F28F5 /* ImagePicker.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImagePicker.framework; path = Carthage/Build/iOS/ImagePicker.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				23C84D0E1FBE830F006F28F5 /* ImagePicker.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,6 +84,7 @@
 				23A436C61FB4478300CE7FC4 /* pracTests */,
 				23A436D11FB4478300CE7FC4 /* pracUITests */,
 				23A436B01FB4478200CE7FC4 /* Products */,
+				23C84D0C1FBE830E006F28F5 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -125,6 +129,14 @@
 			path = pracUITests;
 			sourceTree = "<group>";
 		};
+		23C84D0C1FBE830E006F28F5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				23C84D0D1FBE830F006F28F5 /* ImagePicker.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -135,6 +147,7 @@
 				23A436AB1FB4478200CE7FC4 /* Sources */,
 				23A436AC1FB4478200CE7FC4 /* Frameworks */,
 				23A436AD1FB4478200CE7FC4 /* Resources */,
+				23C84D0F1FBE833A006F28F5 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -253,6 +266,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		23C84D0F1FBE833A006F28F5 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/ImagePicker.framework",
+			);
+			outputPaths = (
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/ImagePicker.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		23A436AB1FB4478200CE7FC4 /* Sources */ = {
@@ -428,6 +459,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = PALV4N24X2;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = prac/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = niko.prac;
@@ -443,6 +478,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = PALV4N24X2;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = prac/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = niko.prac;

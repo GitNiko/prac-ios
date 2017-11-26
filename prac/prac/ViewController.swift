@@ -8,8 +8,21 @@
 
 import UIKit
 import Photos
+import ImagePicker
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, ImagePickerDelegate {
+    func wrapperDidPress(_ imagePicker: ImagePickerController, images: [UIImage]) {
+        //
+    }
+    
+    func doneButtonDidPress(_ imagePicker: ImagePickerController, images: [UIImage]) {
+        //
+    }
+    
+    func cancelButtonDidPress(_ imagePicker: ImagePickerController) {
+        //
+    }
+    
     
     @IBOutlet weak var imageview: UIImageView!
     func simpleQueues() {
@@ -113,45 +126,58 @@ class ViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
 //        simpleQueues()
 //        queuesWithQoS()
-        concurrentQueues()
-        if let queue = inactiveQueue {
-            queue.activate()
-        }
+//        concurrentQueues()
+//        if let queue = inactiveQueue {
+//            queue.activate()
+//        }
 //        queueWithDelay()
 //        fetchImage()
 //        useWorkItem()
     }
     
-
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        let authorizationStatus = PHPhotoLibrary.authorizationStatus()
-            
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
+        view.addGestureRecognizer(tapGesture)
+//        let authorizationStatus = PHPhotoLibrary.authorizationStatus()
+//
+//
+//        PHPhotoLibrary.requestAuthorization({
+//            (status: PHAuthorizationStatus) in
+//            switch status {
+//            case PHAuthorizationStatus.notDetermined:
+//                print("notDetermined")
+//            case PHAuthorizationStatus.denied:
+//                print("denied")
+//            case PHAuthorizationStatus.authorized:
+//                print("authorized")
+//                let allPhotosOptions = PHFetchOptions()
+//                allPhotosOptions.predicate = NSPredicate(format: "mediaType = %d", PHAssetMediaType.image.rawValue)
+//                let result = PHAsset.fetchAssets(with: PHAssetMediaType.image, options: allPhotosOptions)
+//                print(result.count)
+//                let asset = result[0]
+////                asset.
+//            case PHAuthorizationStatus.restricted:
+//                print("restricted")
+//            default:
+//                print("default")
+//            }
+//    })
         
-        PHPhotoLibrary.requestAuthorization({
-            (status: PHAuthorizationStatus) in
-            switch status {
-            case PHAuthorizationStatus.notDetermined:
-                print("notDetermined")
-            case PHAuthorizationStatus.denied:
-                print("denied")
-            case PHAuthorizationStatus.authorized:
-                print("authorized")
-                let allPhotosOptions = PHFetchOptions()
-                allPhotosOptions.predicate = NSPredicate(format: "mediaType = %d", PHAssetMediaType.image.rawValue)
-                let result = PHAsset.fetchAssets(with: PHAssetMediaType.image, options: allPhotosOptions)
-                print(result.count)
-                let asset = result[0]
-//                asset.
-            case PHAuthorizationStatus.restricted:
-                print("restricted")
-            default:
-                print("default")
-            }
-        })
         
+    
         
         // Do any additional setup after loading the view, typically from a nib.
+    }
+    
+    override func viewDidLayoutSubviews() {
+        let imagePickerController = ImagePickerController()
+        imagePickerController.delegate = self
+//        self.present(imagePickerController, animated: true, completion: nil)
     }
 
     override func didReceiveMemoryWarning() {

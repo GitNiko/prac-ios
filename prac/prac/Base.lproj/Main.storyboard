@@ -28,11 +28,61 @@
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="240" id="nCh-9z-83S"/>
                                 </constraints>
                             </imageView>
+                            <view alpha="0.55000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dT1-g9-HHX" userLabel="back">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GuY-fJ-mFv">
+                                        <rect key="frame" x="72" y="49" width="100" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="100" id="rtm-0a-k9s"/>
+                                        </constraints>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                    </textField>
+                                </subviews>
+                                <color key="backgroundColor" red="0.54339199545346406" green="1" blue="0.99786195341999739" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="240" id="Pva-R8-S8b"/>
+                                    <constraint firstAttribute="height" constant="128" id="cIt-4J-Nbe"/>
+                                    <constraint firstItem="GuY-fJ-mFv" firstAttribute="leading" secondItem="dT1-g9-HHX" secondAttribute="leading" constant="72" id="ePc-j0-byb"/>
+                                    <constraint firstItem="GuY-fJ-mFv" firstAttribute="top" secondItem="dT1-g9-HHX" secondAttribute="top" constant="49" id="oQy-PS-Cjf"/>
+                                </constraints>
+                            </view>
+                            <view alpha="0.45000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f67-fw-flO" userLabel="front">
+                                <rect key="frame" x="0.0" y="-2" width="240" height="128"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dqL-do-2Cq">
+                                        <rect key="frame" x="72" y="49" width="97" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="96s-ai-nMk"/>
+                                            <constraint firstAttribute="width" constant="97" id="U2w-Rb-9T1"/>
+                                        </constraints>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
+                                    </textField>
+                                </subviews>
+                                <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="dqL-do-2Cq" firstAttribute="top" secondItem="f67-fw-flO" secondAttribute="top" constant="49" id="1xF-Dd-QPA"/>
+                                    <constraint firstAttribute="height" constant="128" id="6c0-DK-FBS"/>
+                                    <constraint firstAttribute="width" constant="240" id="AQA-4Y-3Py"/>
+                                    <constraint firstItem="dqL-do-2Cq" firstAttribute="leading" secondItem="f67-fw-flO" secondAttribute="leading" constant="72" id="SdU-PF-9DH"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="f67-fw-flO" firstAttribute="top" secondItem="dT1-g9-HHX" secondAttribute="bottom" constant="-130" id="3c1-jr-JoY" userLabel="front.top = back.bottom"/>
+                            <constraint firstItem="dT1-g9-HHX" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="478-hn-mPo"/>
+                            <constraint firstItem="f67-fw-flO" firstAttribute="trailing" secondItem="dT1-g9-HHX" secondAttribute="trailing" id="Bdu-Rk-RQc"/>
+                            <constraint firstItem="f67-fw-flO" firstAttribute="trailing" secondItem="dT1-g9-HHX" secondAttribute="trailing" id="EJ8-e8-0kf"/>
                             <constraint firstItem="2cU-cc-GJi" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="100" id="Kiq-U9-fdI"/>
+                            <constraint firstItem="f67-fw-flO" firstAttribute="leading" secondItem="dT1-g9-HHX" secondAttribute="leading" id="fie-2I-TdJ"/>
+                            <constraint firstItem="dT1-g9-HHX" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="qgD-tU-W1l"/>
                             <constraint firstItem="2cU-cc-GJi" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="200" id="s9E-KA-tlh"/>
+                            <constraint firstItem="f67-fw-flO" firstAttribute="trailing" secondItem="dT1-g9-HHX" secondAttribute="trailing" id="tdf-3d-e6L"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
